@@ -1,0 +1,5 @@
+#pragma once
+
+#define CFG_TUSB_RHPORT0_MODE OPT_MODE_DEVICE
+#define CFG_TUD_HID 1
+#define REPORT_ID_MOUSE 1
