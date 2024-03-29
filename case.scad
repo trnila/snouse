@@ -1,5 +1,7 @@
 include <NopSCADlib/vitamins/pcb.scad>
 
+part = "all";
+
 tol = 0.06;
 width = 17.65+tol;
 length = 23.7+tol;
@@ -11,9 +13,13 @@ btn_tol = 8*tol;
 btn_offset = [2*wall+2.3, length-10, 0];
 
 pcb_h=2;
+module part(name) {
+	if(part == name || part == "all") {
+		children();
+	}
+}
 
-
-module box() {
+module box() part("box") {
 	difference() {
 		translate([0, 0, wall])
 		cube([width + 2*wall, length + 2*wall, height+2*wall]);
@@ -27,7 +33,7 @@ module box() {
 	}
 }
 
-module cover() {
+module cover() part("cover") {
 	difference() {
 		translate([0, 0, wall])
 		cube([width + 2*wall, length + 2*wall, wall]);
@@ -46,7 +52,7 @@ module cover() {
 	}
 }
 
-module button() {
+module button() part("button") {
 	cube([btn_w-btn_tol, btn_l-btn_tol, 2.1+1+1]);
 		translate([-btn_tol, -btn_tol, 0])
 		cube([btn_w+btn_tol, btn_l+btn_tol, 2]);
