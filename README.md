@@ -8,6 +8,9 @@ $ cmake --build build
 $ picotool load -f build/snouse.uf2
 ```
 
+## Create custom trajectory
+Run `./create_trajectory.py`, hold mouse button to record and then press escape to save trajectory into `./src/trajectory.h`.
+
 ## Build stl models
 ```sh
 $ cmake -S . -B build && cmake --build build --target stls
