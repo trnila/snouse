@@ -9,6 +9,10 @@ target_include_directories(snouse PRIVATE src)
 target_link_libraries(snouse PRIVATE pico_stdlib tinyusb_device tinyusb_board)
 pico_add_extra_outputs(snouse)
 
+add_custom_target(flash
+    COMMAND sudo picotool load -f ${CMAKE_BINARY_DIR}/snouse.uf2 && sudo picotool reboot
+    DEPENDS snouse
+)
 
 function(render_stl_part part)
     SET(OUT_DIR ${CMAKE_BINARY_DIR}/stls/)
