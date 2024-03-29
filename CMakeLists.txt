@@ -18,12 +18,11 @@ function(render_stl_part part)
     SET(OUT_DIR ${CMAKE_BINARY_DIR}/stls/)
     file(MAKE_DIRECTORY ${OUT_DIR})
     SET(OUT ${OUT_DIR}/${part}.stl)
-    add_custom_command(
-        OUTPUT ${OUT}
+    add_custom_target(
+        stl_${part}
         COMMAND OPENSCADPATH=${CMAKE_BINARY_DIR} openscad --hardwarnings -D 'part="${part}"' -o ${OUT} ${CMAKE_SOURCE_DIR}/case.scad
-        DEPENDS ${CMAKE_SOURCE_DIR}/case.scad
+        DEPENDS ${CMAKE_SOURCE_DIR}/case.scad NopSCADlib
     )
-    add_custom_target(stl_${part} DEPENDS ${OUT} NopSCADlib)
     add_dependencies(stls stl_${part})
 endfunction()
 
